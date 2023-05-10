@@ -12,7 +12,6 @@
 #include "physpropclientside.h"
 #include "mathlib/vector.h"
 #include "dag_entity.h"
-#include <string>
 #include "proxyentity.h"
 #include "materialsystem/imaterial.h"
 #include "materialsystem/imaterialvar.h"

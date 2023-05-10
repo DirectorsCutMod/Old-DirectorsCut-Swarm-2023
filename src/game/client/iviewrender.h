@@ -1,4 +1,4 @@
-//===== Copyright © 1996-2005, Valve Corporation, All rights reserved. ======//
+//===== Copyright ï¿½ 1996-2005, Valve Corporation, All rights reserved. ======//
 //
 // Purpose: 
 //
@@ -16,7 +16,7 @@
 #include "ivrenderview.h"
 
 
-#define MAX_DEPTH_TEXTURE_SHADOWS 1
+#define MAX_DEPTH_TEXTURE_SHADOWS 8
 #define MAX_DEPTH_TEXTURE_HIGHRES_SHADOWS 0
 
 #define MAX_DEPTH_TEXTURE_SHADOWS_TOOLS 8

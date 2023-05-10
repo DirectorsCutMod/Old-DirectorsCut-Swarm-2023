@@ -1,13 +1,3 @@
-pbr_vs20b.fxc
-common_hlsl_cpp_consts.h
-common_fxc.h
-common_pragmas.h
-common_vs_fxc.h
-pbr_vs20b.fxc
-common_hlsl_cpp_consts.h
-common_fxc.h
-common_pragmas.h
-common_vs_fxc.h
 ..\..\dx9sdk\utilities\dx_proxy.dll 
 ..\..\..\common\alien swarm\bin\shadercompile.exe 
 ..\..\..\common\alien swarm\bin\shadercompile_dll.dll 

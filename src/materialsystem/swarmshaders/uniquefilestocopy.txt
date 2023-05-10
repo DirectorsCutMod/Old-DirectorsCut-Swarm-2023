@@ -3,8 +3,3 @@
 ..\..\..\common\alien swarm\bin\tier0.dll 
 ..\..\..\common\alien swarm\bin\vstdlib.dll 
 ..\..\dx9sdk\utilities\dx_proxy.dll 
-common_fxc.h
-common_hlsl_cpp_consts.h
-common_pragmas.h
-common_vs_fxc.h
-pbr_vs20b.fxc

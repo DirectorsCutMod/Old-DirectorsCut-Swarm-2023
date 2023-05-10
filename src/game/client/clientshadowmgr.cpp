@@ -1,4 +1,4 @@
-//===== Copyright © 1996-2005, Valve Corporation, All rights reserved. ======//
+//===== Copyright ï¿½ 1996-2005, Valve Corporation, All rights reserved. ======//
 //
 // Purpose: 
 //
@@ -1399,11 +1399,11 @@ void CClientShadowMgr::CalculateRenderTargetsAndSizes( void )
 		
 	m_nDepthTextureResolution = r_flashlightdepthres.GetInt();
 	m_nDepthTextureResolutionHigh = r_flashlightdepthreshigh.GetInt();
-	if ( bTools )									// Higher resolution shadow maps in tools mode
-	{
-		char defaultRes[] = "2048";
-		m_nDepthTextureResolution = atoi( CommandLine()->ParmValue( "-sfm_shadowmapres", defaultRes ) );
-	}
+	//if ( bTools )									// Higher resolution shadow maps in tools mode
+	//{
+	char defaultRes[] = "2048";
+	m_nDepthTextureResolution = atoi( CommandLine()->ParmValue( "-sfm_shadowmapres", defaultRes ) );
+	//}
 	m_nMaxDepthTextureShadows = bTools ? MAX_DEPTH_TEXTURE_SHADOWS_TOOLS : MAX_DEPTH_TEXTURE_SHADOWS;	// Just one shadow depth texture in games, more in tools
 }
 //-----------------------------------------------------------------------------

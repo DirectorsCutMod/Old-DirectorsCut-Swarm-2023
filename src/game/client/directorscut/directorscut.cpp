@@ -33,6 +33,7 @@
 
 // memdbgon must be the last include file in a .cpp file!!!
 #include "tier0/memdbgon.h"
+#include <toolframework_client.h>
 
 CDirectorsCutSystem g_DirectorsCutSystem;
 
@@ -43,8 +44,8 @@ CDirectorsCutSystem &DirectorsCutGameSystem()
 	return g_DirectorsCutSystem;
 }
 
-CElementPointer* CreateElement(bool add, bool setIndex, DAG_ type);
-CElementPointer* CreateElement(bool add, bool setIndex, DAG_ type, char* name, KeyValues* kv);
+CElementPointer* DXCreateElement(bool add, bool setIndex, DAG_ type);
+CElementPointer* DXCreateElement(bool add, bool setIndex, DAG_ type, char* name, KeyValues* kv);
 void UnserializeKeyValuesDX(KeyValues* kv, bool append = false);
 KeyValues* SerializeKeyValuesDX();
 void SaveToKeyValues(char* path);
@@ -392,7 +393,7 @@ void APIENTRY EndScene(LPDIRECT3DDEVICE9 p_pDevice)
 						if (ImGui::BeginMenu("Model"))
 						{
 							if (ImGui::MenuItem(g_DirectorsCutSystem.modelName))
-								CreateElement(true, true, DAG_MODEL);
+								DXCreateElement(true, true, DAG_MODEL);
 
 							//if (ImGui::MenuItem("Enter Model Name"))
 								//ImGui::OpenPopup("ModelEntry");
@@ -433,17 +434,17 @@ void APIENTRY EndScene(LPDIRECT3DDEVICE9 p_pDevice)
 									}
 									// create the element
 									sprintf(g_DirectorsCutSystem.modelName, "%s", relativePath);
-									CreateElement(true, true, DAG_MODEL);
+									DXCreateElement(true, true, DAG_MODEL);
 								}
 							}
 							ImGui::EndMenu();
 						}
 						if (ImGui::MenuItem("Light"))
-							CreateElement(true, true, DAG_LIGHT);
+							DXCreateElement(true, true, DAG_LIGHT);
 						if (ImGui::MenuItem("Camera"))
-							CreateElement(true, true, DAG_CAMERA);
+							DXCreateElement(true, true, DAG_CAMERA);
 						if (ImGui::MenuItem("Generic"))
-							CreateElement(true, true, DAG_NONE);
+							DXCreateElement(true, true, DAG_NONE);
 						ImGui::EndMenu();
 					}
 
@@ -454,7 +455,7 @@ void APIENTRY EndScene(LPDIRECT3DDEVICE9 p_pDevice)
 						if (ImGui::InputText("Model Name", g_DirectorsCutSystem.modelName, CHAR_MAX))
 							g_DirectorsCutSystem.gotInput = true;
 						if (ImGui::Button("OK"))
-							CreateElement(true, true, DAG_MODEL);
+							DXCreateElement(true, true, DAG_MODEL);
 						ImGui::EndPopup();
 					}
 
@@ -562,6 +563,14 @@ void APIENTRY EndScene(LPDIRECT3DDEVICE9 p_pDevice)
 										case DAG_MODEL:
 										{
 											ImGui::Text("***** MODEL *****");
+											if(ToolsEnabled() && ImGui::MenuItem("Write record list"))
+											{
+												CModelElement* modelDag = (CModelElement*)elementPtr;
+												KeyValues* kv = new KeyValues("recordlist");
+												modelDag->GetToolRecordingState(kv);
+												kv->SaveToFile(g_pFullFileSystem, "recordlist.vdf", "MOD");
+												kv->deleteThis();
+											}
 											break;
 										}
 										case DAG_LIGHT:
@@ -2299,7 +2308,7 @@ void UnserializeKeyValuesDX(KeyValues* kv, bool append)
 			// Get element data
 			KeyValues* data = element->FindKey("data", true);
 			// Create element
-			CElementPointer* elementPtr = CreateElement(false, false, dagType, name, data);
+			CElementPointer* elementPtr = DXCreateElement(false, false, dagType, name, data);
 			if (element == nullptr)
 			{
 				Msg("Director's Cut: Failed to create element %s\n", name);
@@ -2471,7 +2480,7 @@ void ImportSFMSession(char* path, int frame)
 	}
 }
 
-CElementPointer* CreateElement(bool add, bool setIndex, DAG_ type)
+CElementPointer* DXCreateElement(bool add, bool setIndex, DAG_ type)
 {
 	// using keyvalues here as parameters may differ between types
 	// also futureproofs new element types
@@ -2491,14 +2500,14 @@ CElementPointer* CreateElement(bool add, bool setIndex, DAG_ type)
 	kv->SetFloat("pivotY", g_DirectorsCutSystem.spawnAtPivot ? g_DirectorsCutSystem.pivot.y : 0);
 	kv->SetFloat("pivotZ", g_DirectorsCutSystem.spawnAtPivot ? g_DirectorsCutSystem.pivot.z : 0);
 
-	CElementPointer* element = CreateElement(add, setIndex, type, "", kv);
+	CElementPointer* element = DXCreateElement(add, setIndex, type, "", kv);
 	kv->deleteThis();
 	if (element != nullptr)
 		return element;
 	return NULL;
 }
 
-CElementPointer* CreateElement(bool add, bool setIndex, DAG_ type, char* name, KeyValues* kv)
+CElementPointer* DXCreateElement(bool add, bool setIndex, DAG_ type, char* name, KeyValues* kv)
 {
 	CElementPointer* newElement = new CElementPointer(type, kv);
 	if (newElement != nullptr)
