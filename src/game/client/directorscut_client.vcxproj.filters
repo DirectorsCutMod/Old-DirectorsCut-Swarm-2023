@@ -94,6 +94,9 @@
     <Filter Include="Source Files\directorscut\imgui\backends">
       <UniqueIdentifier>{910923af-16b7-4235-93a7-4ba7fee4f3f1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\directorscut_new">
+      <UniqueIdentifier>{896a549a-8062-47f3-8c9f-f8d8f93fe6c8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="client_base.vpc">
@@ -1990,6 +1993,12 @@
     </ClCompile>
     <ClCompile Include="directorscut\imgui_skin.cpp">
       <Filter>Source Files\directorscut</Filter>
+    </ClCompile>
+    <ClCompile Include="directorscut_new\vgui_dxpanel.cpp">
+      <Filter>Source Files\directorscut_new</Filter>
+    </ClCompile>
+    <ClCompile Include="..\shared\directorscut_new\dx_service.cpp">
+      <Filter>Source Files\directorscut_new</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -4308,6 +4317,15 @@
     </ClInclude>
     <ClInclude Include="directorscut\imgui_skin.h">
       <Filter>Source Files\directorscut</Filter>
+    </ClInclude>
+    <ClInclude Include="directorscut_new\idxgui.h">
+      <Filter>Source Files\directorscut_new</Filter>
+    </ClInclude>
+    <ClInclude Include="directorscut_new\vgui_dxpanel.h">
+      <Filter>Source Files\directorscut_new</Filter>
+    </ClInclude>
+    <ClInclude Include="..\shared\directorscut_new\dx_service.h">
+      <Filter>Source Files\directorscut_new</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

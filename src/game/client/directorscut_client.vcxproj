@@ -81,7 +81,7 @@
     <ClCompile>
       <AdditionalOptions>/MP %(AdditionalOptions)</AdditionalOptions>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>.\hl2;.\directorscut;.\sdk;.\sdk\vgui;..\statemachine;..\..\game\shared\multiplayer;..\..\game\shared\sdk;.\;..\..\common;..\..\public;..\..\public\tier0;..\..\public\tier1;..\..\game\shared;.\game_controls;$(IntDir);..\..\game\client\sdk\gameui;.\directorscut\.;.\directorscut\imgui\.;.\directorscut\imgui\backends\.;.\directorscut\imguizmo\.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.\hl2;.\directorscut;.\sdk;.\sdk\vgui;..\statemachine;..\..\game\shared\multiplayer;..\..\game\shared\sdk;.\;..\..\common;..\..\public;..\..\public\tier0;..\..\public\tier1;..\..\game\shared;.\game_controls;$(IntDir);..\..\game\client\sdk\gameui;.\directorscut\.;.\directorscut\imgui\.;.\directorscut\imgui\backends\.;.\directorscut\imguizmo\.;C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include;$(QTDIR)\include;$(QTDIR)\include\ActiveQt;$(QTDIR)\include\Qt3DAnimation;$(QTDIR)\include\Qt3DCore;$(QTDIR)\include\Qt3DExtras;$(QTDIR)\include\Qt3DInput;$(QTDIR)\include\Qt3DLogic;$(QTDIR)\include\Qt3DQuick;$(QTDIR)\include\Qt3DQuickAnimation;$(QTDIR)\include\Qt3DQuickExtras;$(QTDIR)\include\Qt3DQuickInput;$(QTDIR)\include\Qt3DQuickRender;$(QTDIR)\include\Qt3DQuickScene2D;$(QTDIR)\include\Qt3DRender;$(QTDIR)\include\QtAccessibilitySupport;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtBluetooth;$(QTDIR)\include\QtConcurrent;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtDBus;$(QTDIR)\include\QtDesigner;$(QTDIR)\include\QtDesignerComponents;$(QTDIR)\include\QtDeviceDiscoverySupport;$(QTDIR)\include\QtEdidSupport;$(QTDIR)\include\QtEglSupport;$(QTDIR)\include\QtEventDispatcherSupport;$(QTDIR)\include\QtFbSupport;$(QTDIR)\include\QtFontDatabaseSupport;$(QTDIR)\include\QtGamepad;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtHelp;$(QTDIR)\include\QtLocation;$(QTDIR)\include\QtMultimedia;$(QTDIR)\include\QtMultimediaQuick;$(QTDIR)\include\QtMultimediaWidgets;$(QTDIR)\include\QtNetwork;$(QTDIR)\include\QtNfc;$(QTDIR)\include\QtOpenGL;$(QTDIR)\include\QtOpenGLExtensions;$(QTDIR)\include\QtPacketProtocol;$(QTDIR)\include\QtPlatformCompositorSupport;$(QTDIR)\include\QtPlatformHeaders;$(QTDIR)\include\QtPositioning;$(QTDIR)\include\QtPositioningQuick;$(QTDIR)\include\QtPrintSupport;$(QTDIR)\include\QtQml;$(QTDIR)\include\QtQmlDebug;$(QTDIR)\include\QtQmlModels;$(QTDIR)\include\QtQmlWorkerScript;$(QTDIR)\include\QtQuick;$(QTDIR)\include\QtQuickControls2;$(QTDIR)\include\QtQuickParticles;$(QTDIR)\include\QtQuickShapes;$(QTDIR)\include\QtQuickTemplates2;$(QTDIR)\include\QtQuickTest;$(QTDIR)\include\QtQuickWidgets;$(QTDIR)\include\QtRemoteObjects;$(QTDIR)\include\QtRepParser;$(QTDIR)\include\QtScxml;$(QTDIR)\include\QtSensors;$(QTDIR)\include\QtSerialBus;$(QTDIR)\include\QtSerialPort;$(QTDIR)\include\QtSql;$(QTDIR)\include\QtSvg;$(QTDIR)\include\QtTest;$(QTDIR)\include\QtTextToSpeech;$(QTDIR)\include\QtThemeSupport;$(QTDIR)\include\QtUiPlugin;$(QTDIR)\include\QtUiTools;$(QTDIR)\include\QtVulkanSupport;$(QTDIR)\include\QtWebChannel;$(QTDIR)\include\QtWebSockets;$(QTDIR)\include\QtWebView;$(QTDIR)\include\QtWidgets;$(QTDIR)\include\QtWindowsUIAutomationSupport;$(QTDIR)\include\QtWinExtras;$(QTDIR)\include\QtXml;$(QTDIR)\include\QtXmlPatterns;$(QTDIR)\include\QtZlib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_WIN32;IMGUI_DEFINE_MATH_OPERATORS;_DEBUG;DEBUG;_WINDOWS;_USRDLL;_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;DLLNAME=client;VPCGAME=swarm;VPCGAMECAPS=SWARM;_DLL_EXT=.dll;COMPILER_MSVC32;COMPILER_MSVC;MEMOVERRIDE_MODULE=client;NO_STRING_T;CLIENT_DLL;VECTOR;VERSION_SAFE_STEAM_API_INTERFACES;PROTECTED_THINGS_ENABLE;strncpy=use_Q_strncpy_instead;_snprintf=use_Q_snprintf_instead;ENABLE_HTMLWINDOW;fopen=dont_use_fopen;SDK_CLIENT_DLL;SDK_DLL;SPLIT_SCREEN_STUBS;GAMEUI_EMBEDDED;GAMEUI_EXPORTS;DEFERRED_DEV;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <StringPooling>true</StringPooling>
       <MinimalRebuild>true</MinimalRebuild>
@@ -108,17 +108,18 @@
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <CompileAs>CompileAsCpp</CompileAs>
       <ErrorReporting>Prompt</ErrorReporting>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>_DEBUG;_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
     </ResourceCompile>
     <Link>
-      <AdditionalDependencies>winmm.lib;d3d9.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>winmm.lib;d3d9.lib;discord-rpc.lib;Qt53DAnimation.lib;Qt53DCore.lib;Qt53DExtras.lib;Qt53DInput.lib;Qt53DLogic.lib;Qt53DQuick.lib;Qt53DQuickAnimation.lib;Qt53DQuickExtras.lib;Qt53DQuickInput.lib;Qt53DQuickRender.lib;Qt53DRender.lib;Qt5AccessibilitySupport.lib;Qt5AxBase.lib;Qt5AxContainer.lib;Qt5AxServer.lib;Qt5Bluetooth.lib;Qt5Concurrent.lib;Qt5Core.lib;Qt5DBus.lib;Qt5Designer.lib;Qt5DesignerComponents.lib;Qt5DeviceDiscoverySupport.lib;Qt5EdidSupport.lib;Qt5EglSupport.lib;Qt5EventDispatcherSupport.lib;Qt5FbSupport.lib;Qt5FontDatabaseSupport.lib;Qt5Gui.lib;Qt5Help.lib;Qt5Location.lib;Qt5Multimedia.lib;Qt5MultimediaQuick.lib;Qt5MultimediaWidgets.lib;Qt5Network.lib;Qt5Nfc.lib;Qt5OpenGL.lib;Qt5OpenGLExtensions.lib;Qt5PacketProtocol.lib;Qt5PlatformCompositorSupport.lib;Qt5Positioning.lib;Qt5PositioningQuick.lib;Qt5PrintSupport.lib;Qt5Qml.lib;Qt5QmlDebug.lib;Qt5QmlDevTools.lib;Qt5QmlModels.lib;Qt5QmlWorkerScript.lib;Qt5Quick.lib;Qt5QuickControls2.lib;Qt5QuickParticles.lib;Qt5QuickShapes.lib;Qt5QuickTemplates2.lib;Qt5QuickTest.lib;Qt5QuickWidgets.lib;Qt5RemoteObjects.lib;Qt5Scxml.lib;Qt5Sensors.lib;Qt5SerialBus.lib;Qt5SerialPort.lib;Qt5Sql.lib;Qt5Svg.lib;Qt5Test.lib;Qt5TextToSpeech.lib;Qt5ThemeSupport.lib;Qt5UiTools.lib;Qt5VulkanSupport.lib;Qt5WebChannel.lib;Qt5WebSockets.lib;Qt5WebView.lib;Qt5Widgets.lib;Qt5WindowsUIAutomationSupport.lib;Qt5WinExtras.lib;Qt5Xml.lib;Qt5XmlPatterns.lib;qtmain.lib;d2d1.lib;d3d10.lib;d3d10_1.lib;d3d11.lib;d3dcompiler.lib;D3DCSX.lib;d3dx10.lib;d3dx11.lib;d3dx9.lib;d3dxof.lib;dinput8.lib;dsetup.lib;dwrite.lib;DxErr.lib;dxgi.lib;X3DAudio.lib;xapobase.lib;XAPOFX.lib;XInput.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <ShowProgress>NotSet</ShowProgress>
       <OutputFile>$(OutDir)client.dll</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
-      <AdditionalLibraryDirectories>..\..\lib\common\.;..\..\lib\public\.;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\..\lib\common\.;..\..\lib\public\.;$(QTDIR)\lib;C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Lib\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <IgnoreSpecificDefaultLibraries>libc;libcd;libcmtd;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <ProgramDatabaseFile>$(IntDir)$(TargetName).pdb</ProgramDatabaseFile>
@@ -164,8 +165,8 @@
       <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
-      <AdditionalIncludeDirectories>.\hl2;.\directorscut;.\sdk;.\sdk\vgui;..\statemachine;..\..\game\shared\multiplayer;..\..\game\shared\sdk;.\;..\..\common;..\..\public;..\..\public\tier0;..\..\public\tier1;..\..\game\shared;.\game_controls;$(IntDir);..\..\game\client\sdk\gameui;.\directorscut\.;.\directorscut\imgui\.;.\directorscut\imgui\backends\.;.\directorscut\imguizmo\.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>WIN32;_WIN32;IMGUI_DEFINE_MATH_OPERATORS;NDEBUG;_WINDOWS;_USRDLL;_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;DLLNAME=client;VPCGAME=swarm;VPCGAMECAPS=SWARM;_DLL_EXT=.dll;COMPILER_MSVC32;COMPILER_MSVC;MEMOVERRIDE_MODULE=client;NO_STRING_T;CLIENT_DLL;VECTOR;VERSION_SAFE_STEAM_API_INTERFACES;PROTECTED_THINGS_ENABLE;strncpy=use_Q_strncpy_instead;_snprintf=use_Q_snprintf_instead;ENABLE_HTMLWINDOW;fopen=dont_use_fopen;SDK_CLIENT_DLL;SDK_DLL;SPLIT_SCREEN_STUBS;GAMEUI_EMBEDDED;GAMEUI_EXPORTS;DEFERRED_DEV;DX_UNIVERSE_SET_PUBLIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>.\hl2;.\directorscut;.\sdk;.\sdk\vgui;..\statemachine;..\..\game\shared\multiplayer;..\..\game\shared\sdk;.\;..\..\common;..\..\public;..\..\public\tier0;..\..\public\tier1;..\..\game\shared;.\game_controls;$(IntDir);..\..\game\client\sdk\gameui;.\directorscut\.;.\directorscut\imgui\.;.\directorscut\imgui\backends\.;.\directorscut\imguizmo\.;C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include;$(QTDIR)\include;$(QTDIR)\include\ActiveQt;$(QTDIR)\include\Qt3DAnimation;$(QTDIR)\include\Qt3DCore;$(QTDIR)\include\Qt3DExtras;$(QTDIR)\include\Qt3DInput;$(QTDIR)\include\Qt3DLogic;$(QTDIR)\include\Qt3DQuick;$(QTDIR)\include\Qt3DQuickAnimation;$(QTDIR)\include\Qt3DQuickExtras;$(QTDIR)\include\Qt3DQuickInput;$(QTDIR)\include\Qt3DQuickRender;$(QTDIR)\include\Qt3DQuickScene2D;$(QTDIR)\include\Qt3DRender;$(QTDIR)\include\QtAccessibilitySupport;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtBluetooth;$(QTDIR)\include\QtConcurrent;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtDBus;$(QTDIR)\include\QtDesigner;$(QTDIR)\include\QtDesignerComponents;$(QTDIR)\include\QtDeviceDiscoverySupport;$(QTDIR)\include\QtEdidSupport;$(QTDIR)\include\QtEglSupport;$(QTDIR)\include\QtEventDispatcherSupport;$(QTDIR)\include\QtFbSupport;$(QTDIR)\include\QtFontDatabaseSupport;$(QTDIR)\include\QtGamepad;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtHelp;$(QTDIR)\include\QtLocation;$(QTDIR)\include\QtMultimedia;$(QTDIR)\include\QtMultimediaQuick;$(QTDIR)\include\QtMultimediaWidgets;$(QTDIR)\include\QtNetwork;$(QTDIR)\include\QtNfc;$(QTDIR)\include\QtOpenGL;$(QTDIR)\include\QtOpenGLExtensions;$(QTDIR)\include\QtPacketProtocol;$(QTDIR)\include\QtPlatformCompositorSupport;$(QTDIR)\include\QtPlatformHeaders;$(QTDIR)\include\QtPositioning;$(QTDIR)\include\QtPositioningQuick;$(QTDIR)\include\QtPrintSupport;$(QTDIR)\include\QtQml;$(QTDIR)\include\QtQmlDebug;$(QTDIR)\include\QtQmlModels;$(QTDIR)\include\QtQmlWorkerScript;$(QTDIR)\include\QtQuick;$(QTDIR)\include\QtQuickControls2;$(QTDIR)\include\QtQuickParticles;$(QTDIR)\include\QtQuickShapes;$(QTDIR)\include\QtQuickTemplates2;$(QTDIR)\include\QtQuickTest;$(QTDIR)\include\QtQuickWidgets;$(QTDIR)\include\QtRemoteObjects;$(QTDIR)\include\QtRepParser;$(QTDIR)\include\QtScxml;$(QTDIR)\include\QtSensors;$(QTDIR)\include\QtSerialBus;$(QTDIR)\include\QtSerialPort;$(QTDIR)\include\QtSql;$(QTDIR)\include\QtSvg;$(QTDIR)\include\QtTest;$(QTDIR)\include\QtTextToSpeech;$(QTDIR)\include\QtThemeSupport;$(QTDIR)\include\QtUiPlugin;$(QTDIR)\include\QtUiTools;$(QTDIR)\include\QtVulkanSupport;$(QTDIR)\include\QtWebChannel;$(QTDIR)\include\QtWebSockets;$(QTDIR)\include\QtWebView;$(QTDIR)\include\QtWidgets;$(QTDIR)\include\QtWindowsUIAutomationSupport;$(QTDIR)\include\QtWinExtras;$(QTDIR)\include\QtXml;$(QTDIR)\include\QtXmlPatterns;$(QTDIR)\include\QtZlib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_WIN32;NDEBUG;_WINDOWS;_USRDLL;_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;DLLNAME=client;VPCGAME=swarm;VPCGAMECAPS=SWARM;_DLL_EXT=.dll;COMPILER_MSVC32;COMPILER_MSVC;MEMOVERRIDE_MODULE=client;NO_STRING_T;CLIENT_DLL;VECTOR;VERSION_SAFE_STEAM_API_INTERFACES;PROTECTED_THINGS_ENABLE;strncpy=use_Q_strncpy_instead;_snprintf=use_Q_snprintf_instead;ENABLE_HTMLWINDOW;fopen=dont_use_fopen;SDK_CLIENT_DLL;SDK_DLL;SPLIT_SCREEN_STUBS;GAMEUI_EMBEDDED;GAMEUI_EXPORTS;DEFERRED_DEV;DX_UNIVERSE_SET_PUBLIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <StringPooling>true</StringPooling>
       <ExceptionHandling>
       </ExceptionHandling>
@@ -196,11 +197,11 @@
       <Culture>0x0409</Culture>
     </ResourceCompile>
     <Link>
-      <AdditionalDependencies>winmm.lib;d3d9.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>winmm.lib;d3d9.lib;discord-rpc.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <ShowProgress>NotSet</ShowProgress>
       <OutputFile>$(OutDir)client.dll</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
-      <AdditionalLibraryDirectories>..\..\lib\common\.;..\..\lib\public\.;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\..\lib\common\.;..\..\lib\public\.;C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Lib\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <IgnoreSpecificDefaultLibraries>libc;libcd;libcmtd;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <ProgramDatabaseFile>$(IntDir)$(TargetName).pdb</ProgramDatabaseFile>
@@ -248,7 +249,7 @@
       <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
-      <AdditionalIncludeDirectories>.\hl2;.\directorscut;.\sdk;.\sdk\vgui;..\statemachine;..\..\game\shared\multiplayer;..\..\game\shared\sdk;.\;..\..\common;..\..\public;..\..\public\tier0;..\..\public\tier1;..\..\game\shared;.\game_controls;$(IntDir);..\..\game\client\sdk\gameui;.\directorscut\.;.\directorscut\imgui\.;.\directorscut\imgui\backends\.;.\directorscut\imguizmo\.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.\hl2;.\directorscut;.\sdk;.\sdk\vgui;..\statemachine;..\..\game\shared\multiplayer;..\..\game\shared\sdk;.\;..\..\common;..\..\public;..\..\public\tier0;..\..\public\tier1;..\..\game\shared;.\game_controls;$(IntDir);..\..\game\client\sdk\gameui;.\directorscut\.;.\directorscut\imgui\.;.\directorscut\imgui\backends\.;.\directorscut\imguizmo\.;C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_WIN32;IMGUI_DEFINE_MATH_OPERATORS;NDEBUG;_WINDOWS;_USRDLL;_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;DLLNAME=client;VPCGAME=swarm;VPCGAMECAPS=SWARM;_DLL_EXT=.dll;COMPILER_MSVC32;COMPILER_MSVC;MEMOVERRIDE_MODULE=client;NO_STRING_T;CLIENT_DLL;VECTOR;VERSION_SAFE_STEAM_API_INTERFACES;PROTECTED_THINGS_ENABLE;strncpy=use_Q_strncpy_instead;_snprintf=use_Q_snprintf_instead;ENABLE_HTMLWINDOW;fopen=dont_use_fopen;SDK_CLIENT_DLL;SDK_DLL;SPLIT_SCREEN_STUBS;GAMEUI_EMBEDDED;GAMEUI_EXPORTS;DEFERRED_DEV;DX_UNIVERSE_SET_BETA;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <StringPooling>true</StringPooling>
       <ExceptionHandling>
@@ -274,17 +275,19 @@
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <CompileAs>CompileAsCpp</CompileAs>
       <ErrorReporting>Prompt</ErrorReporting>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <LanguageStandard>stdcpp14</LanguageStandard>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>NDEBUG;_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
     </ResourceCompile>
     <Link>
-      <AdditionalDependencies>winmm.lib;d3d9.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>winmm.lib;d3d9.lib;discord-rpc.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <ShowProgress>NotSet</ShowProgress>
       <OutputFile>$(OutDir)client.dll</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
-      <AdditionalLibraryDirectories>..\..\lib\common\.;..\..\lib\public\.;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\..\lib\common\.;..\..\lib\public\.;C:\Program Files (x86)\Microsoft DirectX SDK (November 2008)\Lib\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <IgnoreSpecificDefaultLibraries>libc;libcd;libcmtd;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <ProgramDatabaseFile>$(IntDir)$(TargetName).pdb</ProgramDatabaseFile>
@@ -342,6 +345,7 @@
     <ClCompile Include="..\shared\deferred\CDefLightContainer.cpp" />
     <ClCompile Include="..\shared\deferred\CDefLightGlobal.cpp" />
     <ClCompile Include="..\shared\deferred\deferred_shared_common.cpp" />
+    <ClCompile Include="..\shared\directorscut_new\dx_service.cpp" />
     <ClCompile Include="..\shared\predicted_viewmodel.cpp" />
     <ClCompile Include="..\shared\sdk\sdk_fx_shared.cpp" />
     <ClCompile Include="..\shared\sdk\sdk_gamemovement.cpp" />
@@ -449,6 +453,7 @@
     <ClCompile Include="directorscut\imgui\imgui_widgets.cpp" />
     <ClCompile Include="directorscut\imgui_public.cpp" />
     <ClCompile Include="directorscut\imgui_skin.cpp" />
+    <ClCompile Include="directorscut_new\vgui_dxpanel.cpp" />
     <ClCompile Include="hl2\C_Func_Monitor.cpp" />
     <ClCompile Include="c_func_movelinear.cpp" />
     <ClCompile Include="c_func_occluder.cpp" />
@@ -1595,6 +1600,7 @@
     <ClCompile Include="directorscut\imguizmo\GraphEditor.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\shared\directorscut_new\dx_service.h" />
     <ClInclude Include="directorscut\imgui\backends\imgui_impl_dx9.h" />
     <ClInclude Include="directorscut\imgui\backends\imgui_impl_win32.h" />
     <ClInclude Include="directorscut\imgui\imconfig.h" />
@@ -1669,6 +1675,8 @@
     <ClInclude Include="deferred\viewrender_deferred.h" />
     <ClInclude Include="directorscut\imgui_public.h" />
     <ClInclude Include="directorscut\imgui_skin.h" />
+    <ClInclude Include="directorscut_new\idxgui.h" />
+    <ClInclude Include="directorscut_new\vgui_dxpanel.h" />
     <ClInclude Include="foundryhelpers_client.h" />
     <ClInclude Include="..\shared\game_timescale_shared.h" />
     <ClInclude Include="hud_locator_target.h" />

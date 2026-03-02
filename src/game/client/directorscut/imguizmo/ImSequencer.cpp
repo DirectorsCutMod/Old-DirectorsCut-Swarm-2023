@@ -24,7 +24,6 @@
 // SOFTWARE.
 //
 
-
 #include "cbase.h"
 
 #include "ImSequencer.h"

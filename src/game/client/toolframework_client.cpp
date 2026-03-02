@@ -51,8 +51,7 @@ static CToolFrameworkClient g_ToolFrameworkClient;
 #ifndef NO_TOOLFRAMEWORK
 
 bool ToolsEnabled()
-{
-	return g_ToolFrameworkClient.m_pTools && g_ToolFrameworkClient.m_pTools->InToolMode();
+{	return g_ToolFrameworkClient.m_pTools && g_ToolFrameworkClient.m_pTools->InToolMode();
 }
 
 #endif

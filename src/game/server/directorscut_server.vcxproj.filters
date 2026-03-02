@@ -40,6 +40,9 @@
     <Filter Include="Source Files\deferred">
       <UniqueIdentifier>{15202bde-9fd3-45af-ad4a-29cd6c36fca6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\directorscut_new">
+      <UniqueIdentifier>{03e6f3ff-6e8c-407a-95a0-4fbbf5180470}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\vpc_scripts\loadaddress.vpc">
@@ -1442,7 +1445,7 @@
     <ClCompile Include="nav_simplify.cpp">
       <Filter>Source Files\Nav Mesh</Filter>
     </ClCompile>
-<ClCompile Include="hl2\ai_behavior_actbusy.cpp">
+    <ClCompile Include="hl2\ai_behavior_actbusy.cpp">
       <Filter>Source Files\From HL2</Filter>
     </ClCompile>
     <ClCompile Include="hl2\ai_spotlight.cpp">
@@ -1550,7 +1553,6 @@
     <ClCompile Include="..\shared\predicted_viewmodel.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-
     <ClCompile Include="..\shared\deferred\CDefLight.cpp">
       <Filter>Source Files\deferred\shared</Filter>
     </ClCompile>
@@ -1565,6 +1567,9 @@
     </ClCompile>
     <ClCompile Include="..\shared\deferred\CDefLightGlobal.cpp">
       <Filter>Source Files\deferred\shared</Filter>
+    </ClCompile>
+    <ClCompile Include="..\shared\directorscut_new\dx_service.cpp">
+      <Filter>Source Files\directorscut_new</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -3200,7 +3205,7 @@
     <ClInclude Include="toolframework_server.h">
       <Filter>Tools Framework</Filter>
     </ClInclude>
-<ClInclude Include="sdk\sdk_player.h">
+    <ClInclude Include="sdk\sdk_player.h">
       <Filter>Source Files\sdk</Filter>
     </ClInclude>
     <ClInclude Include="sdk\sdk_fire.h">
@@ -3236,7 +3241,6 @@
     <ClInclude Include="..\shared\predicted_viewmodel.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-
     <ClInclude Include="deferred\deferred_server_common.h">
       <Filter>Source Files\deferred</Filter>
     </ClInclude>
@@ -3255,8 +3259,10 @@
     <ClInclude Include="..\shared\deferred\CDefLightGlobal.h">
       <Filter>Source Files\deferred\shared</Filter>
     </ClInclude>
+    <ClInclude Include="..\shared\directorscut_new\dx_service.h">
+      <Filter>Source Files\directorscut_new</Filter>
+    </ClInclude>
   </ItemGroup>
-
   <ItemGroup>
     <Library Include="..\..\lib\public\bonesetup.lib">
       <Filter>Link Libraries</Filter>

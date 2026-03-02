@@ -1,0 +1,102 @@
+<!-- dmx encoding keyvalues2 1 format dmx 1 -->
+"DmElement"
+{
+	"id" "elementid" "6a9c692c-99a3-4f82-8b4c-05f3c7d1d779"
+	"activeClip" "element" "7630a0d7-62f1-4ec1-b28d-6019df8a657c"
+	"cameraBin" "element_array" 
+	[
+	]
+	"clipBin" "element_array" 
+	[
+		"element" "7630a0d7-62f1-4ec1-b28d-6019df8a657c"
+	]
+	"miscBin" "element_array" 
+	[
+	]
+	"name" "string" "session"
+	"settings" "DmeSettings"
+	{
+		"id" "elementid" "732caaa9-2c8d-490d-b2a4-dfcc1e2efc7f"
+		"name" "string" "sessionSettings"
+	}
+	
+}
+
+"DmeFilmClip"
+{
+	"id" "elementid" "7630a0d7-62f1-4ec1-b28d-6019df8a657c"
+	"activeMonitor" "int" "0"
+	"aviFile" "string" ""
+	"color" "color" "0 0 0 0"
+	"displayScale" "float" "1"
+	"dxmeta" "int" "50814560"
+	"fadeIn" "float" "0"
+	"fadeOut" "float" "0"
+	"mapname" "string" ""
+	"mute" "bool" "0"
+	"name" "string" "Test"
+	"subClipTrackGroup" "DmeTrackGroup"
+	{
+		"id" "elementid" "afc0b9b8-0e91-444f-973c-2beeef73650d"
+		"children" "element_array" 
+		[
+		]
+		"displayScale" "float" "1"
+		"dxmeta" "int" "40121584"
+		"forcemultitrack" "bool" "0"
+		"minimized" "bool" "0"
+		"mute" "bool" "0"
+		"name" "string" "subClipTrackGroup"
+		"visible" "bool" "1"
+		"volume" "float" "1"
+	}
+	
+	"text" "string" ""
+	"timeFrame" "DmeTimeFrame"
+	{
+		"id" "elementid" "561c832a-1a3f-4386-85d7-bbeacb66a603"
+		"duration" "time" "12.8333"
+		"dxmeta" "int" "52485664"
+		"name" "string" "unnamed"
+		"offset" "time" "0.0000"
+		"scale" "float" "1"
+		"start" "time" "0.0000"
+	}
+	
+	"trackGroups" "element_array" 
+	[
+		"DmeTrackGroup"
+		{
+			"id" "elementid" "0028e163-7384-499f-aef4-6df6d73d725c"
+			"children" "element_array" 
+			[
+			]
+			"displayScale" "float" "1"
+			"dxmeta" "int" "40179728"
+			"forcemultitrack" "bool" "0"
+			"minimized" "bool" "0"
+			"mute" "bool" "0"
+			"name" "string" "Sound"
+			"visible" "bool" "1"
+			"volume" "float" "1"
+		},
+		"DmeTrackGroup"
+		{
+			"id" "elementid" "a6074122-fd67-431a-adc2-306f2bbb46f3"
+			"children" "element_array" 
+			[
+			]
+			"displayScale" "float" "1"
+			"dxmeta" "int" "40114920"
+			"forcemultitrack" "bool" "0"
+			"minimized" "bool" "0"
+			"mute" "bool" "0"
+			"name" "string" "Overlay"
+			"visible" "bool" "1"
+			"volume" "float" "1"
+		}
+	]
+	"useAviFile" "bool" "0"
+	"volume" "float" "1"
+}
+

@@ -141,6 +141,10 @@
 #include "tier1/UtlDict.h"
 #include "keybindinglistener.h"
 
+// Discord RPC
+#include "discord_rpc.h"
+#include <time.h>
+
 // @Deferred - Biohazard
 // For cookie string table
 #include "deferred/deferred_shared_common.h"
@@ -289,6 +293,10 @@ void DispatchHudText( const char *pszName );
 static ConVar s_CV_ShowParticleCounts("showparticlecounts", "0", 0, "Display number of particles drawn per frame");
 static ConVar s_cl_team("cl_team", "default", FCVAR_USERINFO|FCVAR_ARCHIVE, "Default team when joining a game");
 static ConVar s_cl_class("cl_class", "default", FCVAR_USERINFO|FCVAR_ARCHIVE, "Default class when joining a game");
+
+// Discord RPC
+static ConVar cl_discord_appid("cl_discord_appid", "1011818709444214864", FCVAR_DEVELOPMENTONLY | FCVAR_CHEAT);
+static int64_t startTimestamp = time(0);
 
 // Physics system
 bool g_bLevelInitialized;
@@ -913,6 +921,42 @@ bool IsEngineThreaded()
 }
 
 //-----------------------------------------------------------------------------
+// Discord RPC
+//-----------------------------------------------------------------------------
+static void HandleDiscordReady(const DiscordUser* connectedUser)
+{
+	DevMsg("Discord: Connected to user %s#%s - %s\n",
+		connectedUser->username,
+		connectedUser->discriminator,
+		connectedUser->userId);
+}
+
+static void HandleDiscordDisconnected(int errcode, const char* message)
+{
+	DevMsg("Discord: Disconnected (%d: %s)\n", errcode, message);
+}
+
+static void HandleDiscordError(int errcode, const char* message)
+{
+	DevMsg("Discord: Error (%d: %s)\n", errcode, message);
+}
+
+static void HandleDiscordJoin(const char* secret)
+{
+	// Not implemented
+}
+
+static void HandleDiscordSpectate(const char* secret)
+{
+	// Not implemented
+}
+
+static void HandleDiscordJoinRequest(const DiscordUser* request)
+{
+	// Not implemented
+}
+
+//-----------------------------------------------------------------------------
 // Constructor
 //-----------------------------------------------------------------------------
 CHLClient::CHLClient() 
@@ -1254,6 +1298,37 @@ int CHLClient::Init( CreateInterfaceFn appSystemFactory, CGlobalVarsBase *pGloba
 
 	// This is a fullscreen element, so only lives on slot 0!!!
 	m_pHudCloseCaption = GET_FULLSCREEN_HUDELEMENT( CHudCloseCaption );
+
+	// Discord RPC
+	COM_TimestampedLog("Discord RPC - Start");
+	
+	DiscordEventHandlers handlers;
+	memset(&handlers, 0, sizeof(handlers));
+
+	handlers.ready = HandleDiscordReady;
+	handlers.disconnected = HandleDiscordDisconnected;
+	handlers.errored = HandleDiscordError;
+	handlers.joinGame = HandleDiscordJoin;
+	handlers.spectateGame = HandleDiscordSpectate;
+	handlers.joinRequest = HandleDiscordJoinRequest;
+
+	char appid[255];
+	sprintf(appid, "%d", engine->GetAppID());
+	Discord_Initialize(cl_discord_appid.GetString(), &handlers, 1, appid);
+
+	if (!g_bTextMode)
+	{
+		DiscordRichPresence discordPresence;
+		memset(&discordPresence, 0, sizeof(discordPresence));
+
+		discordPresence.state = "No Session";
+		discordPresence.details = "No Map";
+		discordPresence.startTimestamp = startTimestamp;
+		discordPresence.largeImageKey = "logo";
+		Discord_UpdatePresence(&discordPresence);
+	}
+
+	COM_TimestampedLog("Discord RPC	- End");
 
 	COM_TimestampedLog( "ClientDLL Init - Finish" );
 	return true;
@@ -1855,6 +1930,20 @@ void CHLClient::LevelInitPreEntity( char const* pMapName )
 	}
 #endif
 
+	// Discord RPC
+	if (!g_bTextMode)
+	{
+		DiscordRichPresence discordPresence;
+		memset(&discordPresence, 0, sizeof(discordPresence));
+
+		char buffer[256];
+		discordPresence.state = "No Session";
+		sprintf(buffer, "Map: %s", pMapName);
+		discordPresence.details = buffer;
+		discordPresence.largeImageKey = "logo";
+		Discord_UpdatePresence(&discordPresence);
+	}
+
 	// Check low violence settings for this map
 	g_RagdollLVManager.SetLowViolence( pMapName );
 
@@ -1958,6 +2047,19 @@ void CHLClient::LevelShutdown( void )
 	for ( int hh = 0; hh < MAX_SPLITSCREEN_PLAYERS; ++hh )
 	{
 		StopAllRumbleEffects( hh );
+	}
+
+	// Discord RPC
+	if (!g_bTextMode)
+	{
+		DiscordRichPresence discordPresence;
+		memset(&discordPresence, 0, sizeof(discordPresence));
+
+		discordPresence.state = "No Session";
+		discordPresence.details = "No Map";
+		discordPresence.startTimestamp = startTimestamp;
+		discordPresence.largeImageKey = "logo";
+		Discord_UpdatePresence(&discordPresence);
 	}
 
 	for ( int hh = 0; hh < MAX_SPLITSCREEN_PLAYERS; ++hh )

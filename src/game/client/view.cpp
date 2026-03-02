@@ -62,7 +62,7 @@
 #define USE_MONITORS
 #endif
 
-#include "directorscut.h"
+#include <directorscut.h>
 	
 // memdbgon must be the last include file in a .cpp file!!!
 #include "tier0/memdbgon.h"
@@ -712,6 +712,7 @@ void CViewRender::SetUpView()
 	
 	// DXCHANGE: Allow the imgui handler to override the view
 	DirectorsCutGameSystem().SetupEngineView(view.origin, view.angles, view.fov);
+	//g_DXService.SetupEngineView(view.origin, view.angles, view.fov);
 
 	if ( engine->IsPlayingDemo() )
 	{

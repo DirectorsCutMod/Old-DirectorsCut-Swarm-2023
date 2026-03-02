@@ -24,10 +24,9 @@
 // SOFTWARE.
 //
 
-#define IMGUI_DEFINE_MATH_OPERATORS
-
 #include "cbase.h"
 
+#define IMGUI_DEFINE_MATH_OPERATORS
 #include "imgui.h"
 #include "imgui_internal.h"
 #include <math.h>

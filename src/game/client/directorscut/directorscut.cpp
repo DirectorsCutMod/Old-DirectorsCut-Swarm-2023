@@ -30,6 +30,7 @@
 #include "dmxloader/dmxelement.h"
 #include <vgui/IInput.h>
 #include <imgui_skin.h>
+#include "view.h"
 
 // memdbgon must be the last include file in a .cpp file!!!
 #include "tier0/memdbgon.h"
@@ -334,6 +335,9 @@ void APIENTRY EndScene(LPDIRECT3DDEVICE9 p_pDevice)
 						ImGui::MenuItem("Editor Window", NULL, &g_DirectorsCutSystem.windowVisibilities[0]);
 						ImGui::MenuItem("Elements Window", NULL, &g_DirectorsCutSystem.windowVisibilities[1]);
 						ImGui::MenuItem("Inspector Window", NULL, &g_DirectorsCutSystem.windowVisibilities[2]);
+						ImGui::MenuItem("Viewport Window", NULL, &g_DirectorsCutSystem.windowVisibilities[4]);
+						ImGui::MenuItem("Graph Window", NULL, &g_DirectorsCutSystem.windowVisibilities[5]);
+						ImGui::MenuItem("Sequencer Window", NULL, &g_DirectorsCutSystem.windowVisibilities[6]);
 					}
 					ImGui::MenuItem("Tutorial Window", NULL, &g_DirectorsCutSystem.windowVisibilities[3]);
 					ImGui::EndMenu();
@@ -913,6 +917,110 @@ void APIENTRY EndScene(LPDIRECT3DDEVICE9 p_pDevice)
 					}
 
 					// end window
+					ImGui::End();
+				}
+
+				// Viewport window
+				if (g_DirectorsCutSystem.windowVisibilities[4])
+				{
+					// Set size
+					ImGui::SetNextWindowSize(ImVec2(320, 180), ImGuiCond_FirstUseEver);
+					ImGui::Begin("Viewport", &g_DirectorsCutSystem.windowVisibilities[4]);
+					/*
+					// Display viewport
+					int x = 0;
+					int y = 0;
+					int w = 320;
+					int h = 180;
+					int sx, sy;
+					vgui::surface()->GetScreenSize( sx, sy );
+					if ( sy > 0 && h > 0 )
+					{
+						float screenaspect = (float)sx / (float)sy;
+						float aspect = (float)w / (float)h;
+						float ratio = screenaspect / aspect;
+						if ( ratio > 1.0f )
+						{
+							int usetall = (float)w / screenaspect;
+							y = ( h - usetall ) / 2;
+							h = usetall;
+						}
+						else
+						{
+							int usewide = (float)h * screenaspect;
+							x = ( w - usewide ) / 2;
+							w = usewide;
+						}
+					}
+					const CViewSetup* playerViewSetup = view->GetPlayerViewSetup();
+					CMatRenderContextPtr pRenderContext( g_pMaterialSystem );
+					pRenderContext->PushRenderTargetAndViewport( g_DirectorsCutSystem.m_ScreenBuffer, 0, 0, w, h );
+					render->SetMainView( playerViewSetup->origin, playerViewSetup->angles );
+					view->RenderView( *playerViewSetup, *playerViewSetup, VIEW_CLEAR_COLOR | VIEW_CLEAR_DEPTH, RENDERVIEW_DRAWHUD | RENDERVIEW_DRAWVIEWMODEL );
+					unsigned char* pImage = (unsigned char*)malloc(w * 3 * h);
+					pRenderContext->ReadPixels(0, 0, w, h, pImage, IMAGE_FORMAT_RGB888);
+					pRenderContext->PopRenderTargetAndViewport();
+					// unsigned rgb image to LPDIRECT3DTEXTURE9
+					LPDIRECT3DTEXTURE9 pTexture;
+					D3DXCreateTexture(p_pDevice, w, h, 1, 0, D3DFMT_X8R8G8B8, D3DPOOL_MANAGED, &pTexture);
+					D3DLOCKED_RECT d3dlr;
+					pTexture->LockRect(0, &d3dlr, 0, 0);
+					unsigned char* pDest = (unsigned char*)d3dlr.pBits;
+					for (int i = 0; i < h; i++)
+					{
+						memcpy(pDest, pImage + (w * 3 * i), w * 3);
+						pDest += d3dlr.Pitch;
+					}
+					pTexture->UnlockRect(0);
+					free(pImage);
+					// Draw viewport
+					ImGui::Image(pTexture, ImVec2(320, 180));
+					*/
+					ImGui::End();
+				}
+
+				// Graph window
+				if (g_DirectorsCutSystem.windowVisibilities[5])
+				{
+					ImGui::Begin("Graph", &g_DirectorsCutSystem.windowVisibilities[5]);
+					// Set up tabbed environment (g_DirectorsCutSystem.graphEditorTab)
+					ImGui::BeginTabBar("GraphTabs");
+					// Graph editor
+					if (ImGui::BeginTabItem("Editor"))
+					{
+						if (ImGui::Button("Fit all nodes"))
+						{
+							g_DirectorsCutSystem.fit = GraphEditor::Fit_AllNodes;
+						}
+						ImGui::SameLine();
+						if (ImGui::Button("Fit selected nodes"))
+						{
+							g_DirectorsCutSystem.fit = GraphEditor::Fit_SelectedNodes;
+						}
+						GraphEditor::Show(g_DirectorsCutSystem.delegate, g_DirectorsCutSystem.options, g_DirectorsCutSystem.viewState, true, &g_DirectorsCutSystem.fit);
+						ImGui::EndTabItem();
+					}
+					// Options
+					if (ImGui::BeginTabItem("Options"))
+					{
+						GraphEditor::EditOptions(g_DirectorsCutSystem.options);
+						ImGui::EndTabItem();
+					}
+					ImGui::End();
+				}
+
+				// Sequencer window
+				if (g_DirectorsCutSystem.windowVisibilities[6])
+				{
+					ImGui::Begin("Sequencer", &g_DirectorsCutSystem.windowVisibilities[6]);
+					ImGui::PushItemWidth(130);
+					ImGui::InputInt("Frame Min", &g_DirectorsCutSystem.mySequence.mFrameMin);
+					ImGui::SameLine();
+					ImGui::InputInt("Frame ", &g_DirectorsCutSystem.currentFrame);
+					ImGui::SameLine();
+					ImGui::InputInt("Frame Max", &g_DirectorsCutSystem.mySequence.mFrameMax);
+					ImGui::PopItemWidth();
+					Sequencer(&g_DirectorsCutSystem.mySequence, &g_DirectorsCutSystem.currentFrame, &g_DirectorsCutSystem.expanded, &g_DirectorsCutSystem.selectedEntry, &g_DirectorsCutSystem.firstFrame, ImSequencer::SEQUENCER_EDIT_STARTEND | ImSequencer::SEQUENCER_ADD | ImSequencer::SEQUENCER_DEL | ImSequencer::SEQUENCER_COPYPASTE | ImSequencer::SEQUENCER_CHANGE_FRAME);
 					ImGui::End();
 				}
 
@@ -1511,6 +1619,30 @@ LRESULT WINAPI WndProc(const HWND hWnd, const UINT msg, const WPARAM wParam, con
 	return CallWindowProc(ogWndProc, hWnd, msg, wParam, lParam);
 }
 
+void CDirectorsCutSystem::InitSceneMaterials()
+{
+	if ( m_ScreenBuffer )
+		return;
+	if ( g_pMaterialSystem->IsTextureLoaded( "_rt_LayoffResult"	) ) 
+	{
+		ITexture *pTexture = g_pMaterialSystem->FindTexture( "_rt_LayoffResult", TEXTURE_GROUP_RENDER_TARGET );
+		m_ScreenBuffer.Init( pTexture );
+	}
+	else
+	{
+		int nBackBufferWidth, nBackBufferHeight;
+		g_pMaterialSystem->GetBackBufferDimensions( nBackBufferWidth, nBackBufferHeight );
+		float flAspect = nBackBufferWidth / (float)nBackBufferHeight;
+		int nPreviewWidth = min( 320, nBackBufferWidth );
+		int nPreviewHeight = ( int )( nPreviewWidth / flAspect + 0.5f );
+		g_pMaterialSystem->BeginRenderTargetAllocation();
+		m_ScreenBuffer.Init( g_pMaterialSystem->CreateNamedRenderTargetTextureEx2(
+			"_rt_LayoffResult", nPreviewWidth, nPreviewHeight, RT_SIZE_OFFSCREEN,
+			g_pMaterialSystem->GetBackBufferFormat(), MATERIAL_RT_DEPTH_SHARED, TEXTUREFLAGS_BORDER ) );
+		g_pMaterialSystem->EndRenderTargetAllocation();
+	}
+}
+
 void CDirectorsCutSystem::SetupEngineView(Vector& origin, QAngle& angles, float& fov)
 {
 	if (levelInit && cvar_imgui_enabled.GetBool() && !engine->IsPaused())
@@ -1565,10 +1697,10 @@ void CDirectorsCutSystem::SetDefaultSettings()
 	// set default values
 	sprintf(modelName, "models/infected/common_male01.mdl");
 	sprintf(lightTexture, "effects/flashlight001");
-	bool newWindowVisibilities[4] = {
-		true, true, true, true
+	bool newWindowVisibilities[7] = {
+		true, true, true, true, true, true, true
 	};
-	for (int i = 0; i < 4; i++)
+	for (int i = 0; i < 7; i++)
 	{
 		windowVisibilities[i] = newWindowVisibilities[i];
 	}
@@ -1626,6 +1758,58 @@ void CDirectorsCutSystem::SetDefaultSettings()
 	spawnAtPivot = false;
 	inspectorDocked = true;
 	savedOnce = false;
+	GraphEditor::Template template1;
+	template1.mHeaderColor = IM_COL32(160, 160, 180, 255);
+	template1.mBackgroundColor = IM_COL32(100, 100, 140, 255);
+	template1.mBackgroundColorOver = IM_COL32(110, 110, 150, 255);
+	template1.mInputCount = 1;
+	template1.mInputNames = new const char* [1] { "MyInput0" };
+	template1.mInputColors = nullptr;
+	template1.mOutputCount = 2;
+	template1.mOutputNames = new const char* [2] { "MyOutput0", "MyOuput1" };
+	template1.mOutputColors = nullptr;
+	GraphEditor::Template template2;
+	template2.mHeaderColor = IM_COL32(180, 160, 160, 255);
+	template2.mBackgroundColor = IM_COL32(140, 100, 100, 255);
+	template2.mBackgroundColorOver = IM_COL32(150, 110, 110, 255);
+	template2.mInputCount = 3;
+	template2.mInputNames = nullptr;
+	template2.mInputColors = new ImU32[3]{ IM_COL32(200,100,100,255), IM_COL32(100,200,100,255), IM_COL32(100,100,200,255) };
+	template2.mOutputCount = 1;
+	template2.mOutputNames = new const char* [1] { "MyOutput0" };
+	template2.mOutputColors = new ImU32[1]{ IM_COL32(200,200,200,255) };
+	delegate.mTemplates.push_back(template1);
+	delegate.mTemplates.push_back(template2);
+	delegate.mNodes = {
+		{
+			"My Node 0",
+			0,
+			0, 0,
+			false
+		},
+
+		{
+			"My Node 1",
+			0,
+			400, 0,
+			false
+		},
+
+		{
+			"My Node 2",
+			1,
+			400, 400,
+			false
+		}
+	};
+	delegate.mLinks = { {0, 0, 1, 0} };
+	mySequence.mFrameMin = -100;
+	mySequence.mFrameMax = 1000;
+	mySequence.myItems.push_back(MySequence::MySequenceItem{ 0, 10, 30, false });
+	mySequence.myItems.push_back(MySequence::MySequenceItem{ 1, 20, 30, true });
+	mySequence.myItems.push_back(MySequence::MySequenceItem{ 3, 12, 60, false });
+	mySequence.myItems.push_back(MySequence::MySequenceItem{ 2, 61, 90, false });
+	mySequence.myItems.push_back(MySequence::MySequenceItem{ 4, 90, 99, false });
 }
 
 void CDirectorsCutSystem::PostInit()
@@ -1684,6 +1868,7 @@ void CDirectorsCutSystem::PostInit()
 
 void CDirectorsCutSystem::Shutdown()
 {
+	return;
 	if (imguiActive)
 	{
 		// Unload Dear ImGui
@@ -2321,7 +2506,7 @@ void UnserializeKeyValuesDX(KeyValues* kv, bool append)
 	KeyValues* settings = kv->FindKey("settings", true);
 	if(settings != nullptr)
 	{
-		FromKeyToBoolArray(settings, "windowVisibilities", 4, g_DirectorsCutSystem.windowVisibilities);
+		FromKeyToBoolArray(settings, "windowVisibilities", 7, g_DirectorsCutSystem.windowVisibilities);
 		FromKeyToFloatArray(settings, "cameraMatrix", 16, g_DirectorsCutSystem.cameraView);
 		FromKeyToFloatArray(settings, "cameraProjection", 16, g_DirectorsCutSystem.cameraProjection);
 		FromKeyToFloatArray(settings, "identityMatrix", 16, g_DirectorsCutSystem.identityMatrix);
@@ -2432,7 +2617,7 @@ KeyValues* SerializeKeyValuesDX()
 		}
 	}
 	KeyValues* settings = kv->FindKey("settings", true);
-	FromBoolArrayToKey(settings, "windowVisibilities", 2, g_DirectorsCutSystem.windowVisibilities);
+	FromBoolArrayToKey(settings, "windowVisibilities", 7, g_DirectorsCutSystem.windowVisibilities);
 	FromFloatArrayToKey(settings, "cameraMatrix", 16, g_DirectorsCutSystem.cameraView);
 	FromFloatArrayToKey(settings, "cameraProjection", 16, g_DirectorsCutSystem.cameraProjection);
 	FromFloatArrayToKey(settings, "identityMatrix", 16, g_DirectorsCutSystem.identityMatrix);

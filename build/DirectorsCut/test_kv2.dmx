@@ -1,0 +1,19 @@
+<!-- dmx encoding keyvalues2 1 format dmx 18 -->
+"DmeDirectorsCutProject"
+{
+	"id" "elementid" "7c19068d-a1e8-43e3-a36c-f4c1d31b68a9"
+	"name" "string" "session"
+	"miscBin" "element_array" 
+	[
+	]
+	"cameraBin" "element_array" 
+	[
+	]
+	"settings" "DmeSettings"
+	{
+		"id" "elementid" "b5ea09f3-1991-411c-9184-4b0b70a435c1"
+		"name" "string" "sessionSettings"
+	}
+	
+}
+
